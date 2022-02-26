@@ -114,4 +114,5 @@ function installProtoc {
   rm -f $PROTOC_ZIP
 }
 
+installProtoc
 buildAll
