@@ -1,0 +1,23 @@
+syntax = "proto3";
+package monoproto.uac;
+
+option go_package = "./";
+
+service UserService {
+  rpc GetUser (GetUsersRequest) returns (GetUsersResponse) {}
+}
+
+message User {
+    string name = 1;
+    int32 id = 2;
+    optional string email = 3;
+    optional string phone = 4;
+}
+
+message GetUsersRequest {
+  repeated int64 ids = 1; 
+}
+
+message GetUsersResponse {
+  repeated User users = 1; 
+}
