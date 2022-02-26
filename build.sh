@@ -51,7 +51,7 @@ function buildProtoForTypes {
       setupBranch $REPOPATH/$reponame
 
       mkdir -p out/$reponame
-      sudo protoc --proto_path=. --go_out=out/$reponame/. --go_opt=paths=source_relative *.proto
+      sudo protoc --proto_path=. --go_out=plugins=grpc:out/$reponame/. --go_opt=paths=source_relative *.proto
   
       # Copy the generated files out of the pb-* path into the repository
       # that we care about
