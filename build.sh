@@ -51,7 +51,7 @@ function buildProtoForTypes {
       setupBranch $REPOPATH/$reponame
 
       mkdir -p out/$reponame
-      protoc --proto_path=. --go_out=plugins=grpc:out/$reponame/. --go_opt=paths=source_relative *.proto
+      sudo protoc --proto_path=. --go_out=plugins=grpc:out/$reponame/. --go_opt=paths=source_relative *.proto
   
       # Copy the generated files out of the pb-* path into the repository
       # that we care about
@@ -109,8 +109,8 @@ function commitAndPush {
 function installProtoc {
   PROTOC_ZIP=protoc-3.14.0-osx-x86_64.zip
   curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/$PROTOC_ZIP
-  unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
-  unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
+  sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
+  sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
   rm -f $PROTOC_ZIP
 }
 
