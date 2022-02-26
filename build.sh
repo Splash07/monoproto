@@ -6,8 +6,8 @@
 
 set -e
 
-REPOPATH=github.com/Splash07
-GIT_HOST=git@github.com:Splash07
+REPOPATH="github.com/Splash07"
+GIT_HOST="git@github.com:Splash07"
 CURRENT_BRANCH=${CIRCLE_BRANCH-"main"}
 
 # Helper for adding a directory to the stack and echoing the result
