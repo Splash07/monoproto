@@ -40,11 +40,8 @@ function buildDir {
 function buildProtoForTypes {
   target=${1%/}
 
-  if [ -f .protolangs ]; then
-    read -r line < .protolangs
-    langs=($(echo $line | tr "," "\n"))
-    for lang in "${langs[@]}"
-    do
+  if [ -s .protolangs ]; then
+    while read lang; do  
       reponame="monoproto-$target-$lang"
       rm -rf $REPOPATH/$reponame
 
@@ -61,7 +58,7 @@ function buildProtoForTypes {
       cp -R out/$reponame/* $REPOPATH/$reponame/
 
       commitAndPush $REPOPATH/$reponame
-    done
+    done < .protolangs
   fi
 }
 
