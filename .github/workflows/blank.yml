@@ -24,7 +24,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: git update-index --chmod=+x ./build.sh
+      - name: Change build.sh permissions
+        run: chmod +x ./build.sh
 
       # Runs a set of commands using the runners shell
       - name: Run build script
