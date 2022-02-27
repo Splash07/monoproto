@@ -1,7 +1,7 @@
 syntax = "proto3";
-package monoproto.uac;
+package uac.v1;
 
-option go_package = "./";
+option go_package = "github.com/Splash07/monoproto-uac-go/v1";
 
 service UserService {
   rpc GetUser (GetUsersRequest) returns (GetUsersResponse) {}

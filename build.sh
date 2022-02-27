@@ -6,8 +6,9 @@
 
 set -e
 
-REPOPATH="github.com/Splash07"
-GIT_HOST="git@github.com:Splash07"
+REPOPATH=github.com/Splash07
+GIT_HOST=git@github.com:Splash07
+ROOT_DIR=$(pwd)
 CURRENT_BRANCH=${CIRCLE_BRANCH-"main"}
 
 # Helper for adding a directory to the stack and echoing the result
@@ -29,9 +30,7 @@ function buildDir {
   echo "Building directory \"$currentDir\""
 
   enterDir $currentDir
-
   buildProtoForTypes $currentDir
-
   leaveDir
 }
 
@@ -49,13 +48,14 @@ function buildProtoForTypes {
       # Clone the repository down and set the branch to the automated one
       git clone $GIT_HOST/$reponame.git $REPOPATH/$reponame
       setupBranch $REPOPATH/$reponame
-
-      mkdir -p out/$reponame
-      sudo protoc --proto_path=. --go_out=plugins=grpc:out/$reponame/. --go_opt=paths=source_relative *.proto
+      
+      mkdir -p out
+      bufGenerate $target $lang
+    
   
-      # Copy the generated files out of the pb-* path into the repository
-      # that we care about
-      cp -R out/$reponame/* $REPOPATH/$reponame/
+      # Copy the generated files into the repository dedicated for each language
+      cp -R out/$lang/* $REPOPATH/$reponame/
+      cp -R out/docs/* $REPOPATH/$reponame/
 
       commitAndPush $REPOPATH/$reponame
     done < .protolangs
@@ -106,4 +106,21 @@ function commitAndPush {
   leaveDir
 }
 
+function bufGenerate {
+  enterDir $ROOT_DIR
+  target=$1
+  lang=$2
+  case $lang in 
+    go)
+      buf generate --template buf.gen.go.yaml -o $target/out $target
+    ;;
+  esac
+  leaveDir
+}
+
+function bufLintAll {
+  buf lint --config buf.yaml
+}
+
+bufLintAll
 buildAll
