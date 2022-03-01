@@ -7,7 +7,7 @@
 set -e
 
 REPOPATH=github.com/Splash07
-GIT_HOST=git@github.com-splash:Splash07
+GIT_HOST=git@github.com:Splash07
 ROOT_DIR=$(pwd)
 CURRENT_BRANCH=${CIRCLE_BRANCH-"main"}
 
