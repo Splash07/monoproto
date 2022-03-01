@@ -52,12 +52,11 @@ function buildProtoForTypes {
       mkdir -p out
       bufGenerate $target $lang
     
-  
       # Copy the generated files into the repository dedicated for each language
       cp -R out/$lang/* $REPOPATH/$reponame/
       cp -R out/docs/* $REPOPATH/$reponame/
 
-      # commitAndPush $REPOPATH/$reponame
+      commitAndPush $REPOPATH/$reponame
     done < .protolangs
   fi
 }
