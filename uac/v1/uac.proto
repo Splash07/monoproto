@@ -4,7 +4,7 @@ package uac.v1;
 option go_package = "github.com/Splash07/monoproto-uac-go/v1";
 
 service UserService {
-  rpc GetUser (GetUsersRequest) returns (GetUsersResponse) {}
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
 }
 
 message User {
@@ -15,10 +15,10 @@ message User {
     optional string address = 5;
 }
 
-message GetUsersRequest {
+message GetUserRequest {
   repeated int64 ids = 1; 
 }
 
-message GetUsersResponse {
+message GetUserResponse {
   repeated User users = 1; 
 }
