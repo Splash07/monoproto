@@ -1,5 +1,5 @@
 syntax = "proto3";
-package uac.v2;
+package uac.v3;
 
 option go_package = "github.com/Splash07/monoproto-uac-go/v3";
 
