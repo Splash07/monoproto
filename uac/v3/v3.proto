@@ -1,0 +1,22 @@
+syntax = "proto3";
+package uac.v2;
+
+option go_package = "github.com/Splash07/monoproto-uac-go/v2";
+
+service UserService {
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {}
+}
+
+message User {
+    int32 id = 1;
+    string name = 2;
+    string address = 3;
+}
+
+message GetUserRequest {
+  repeated int64 ids = 1; 
+}
+
+message GetUserResponse {
+  repeated User users = 1; 
+}
